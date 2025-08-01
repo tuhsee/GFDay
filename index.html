@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      padding: 20px;
       background-color: #f3e5f5;
       font-family: 'Quicksand', sans-serif;
       display: flex;
@@ -19,6 +19,7 @@
       overflow-x: hidden;
       text-align: center;
       position: relative;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -114,6 +115,7 @@
       justify-content: center;
       align-items: center;
       margin-top: 40px;
+      width: 100%;
     }
 
     .envelope {
@@ -189,7 +191,7 @@
   </div>
 
   <div class="letter-popup" id="final-letter">
-    💌 <strong>My love Sheryl,</strong> 💌<br><br>
+ 💌 <strong>My love Sheryl,</strong> 💌<br><br>
     ❤️  Every single reason above is a tiny piece of the love I feel for you. I’m grateful every day for your presence in my life.<br>
    I know sometimes I may not the best boyfriend, but I'm always learning new ways I can show my love and care to you.<br>
     Thank you for always communicating with me and showing your love in so many ways too. I love you so much my dear, don't ever forget that.<br>
@@ -197,11 +199,12 @@
 <br><br>
     Yours forever,<br>
    Joel Tse 💕
+
   </div>
 
   <script>
     const reasons = [
-     "I love your strength, even on your hardest days.",
+      "I love your strength, even on your hardest days.",
       "I love how you remember the little things that matter.",
       "I love how you make me feel like the luckiest person alive.",
       "I love your kindness and thoughtfulness, it's truly unmatched.",
@@ -214,6 +217,7 @@
 	"I love how we always can't bear to say goodbye.",
       "I love When you hold me close, all my worries just melt away.",
       "I love your way with words, every letter by you just feels like a story I'm hooked on."
+
     ];
 
     let index = 0;
