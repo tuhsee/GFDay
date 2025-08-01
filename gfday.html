@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reasons Why I Love You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3e5f5;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #8e24aa;
+      margin-top: 30px;
+    }
+
+    h3 {
+      color: #6a1b9a;
+      margin-top: -10px;
+      font-weight: normal;
+    }
+
+    #reason-box {
+      margin: 30px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      background-color: #ede7f6;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      min-height: 80px;
+      color: #4a148c;
+      font-size: 1.2rem;
+    }
+
+    #reason-box.typing {
+      border-right: 2px solid #8e24aa;
+      white-space: pre-wrap;
+      overflow: hidden;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: #8e24aa; }
+      50% { border-color: transparent; }
+    }
+
+    #next-btn, #love-letter-btn {
+      background: linear-gradient(to right, #ab47bc, #8e24aa);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #next-btn:hover, #love-letter-btn:hover {
+      background: linear-gradient(to right, #ba68c8, #9c27b0);
+    }
+
+    #end-message {
+      display: none;
+      font-size: 1.5rem;
+      color: #6a1b9a;
+      margin-top: 30px;
+      padding: 0 20px;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    #end-message.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 24px;
+      animation: rise 6s ease-out infinite;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    #envelope-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 250px;
+      height: 150px;
+      background-color: #ab47bc;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: float-up 4s ease-out forwards;
+    }
+
+    @keyframes float-up {
+      from { transform: translateY(100vh); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background-color: #ce93d8;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top;
+      transition: transform 0.5s;
+      z-index: 2;
+    }
+
+    .letter-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f3e5f5;
+      border: 2px solid #8e24aa;
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 90%;
+      width: 350px;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 1000;
+      font-size: 1rem;
+      color: #4a148c;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: left;
+    }
+
+    .letter-popup .heart {
+      font-size: 20px;
+    }
+
+    .letter-popup.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy National Girlfriend Day 💖</h1>
+  <h3>Always yours, now and forever &lt;3</h3>
+
+  <div id="reason-box"></div>
+  <button id="next-btn">Show Me a Reason 💘</button>
+  <div id="end-message">I love you more than words can ever say 💞</div>
+
+  <div id="envelope-container">
+    <div class="envelope" onclick="toggleLetter()">
+      <div class="flap"></div>
+    </div>
+  </div>
+
+  <div class="letter-popup" id="final-letter">
+    💌 <strong>My love Sheryl,</strong> 💌<br><br>
+    ❤️  Every single reason above is a tiny piece of the love I feel for you. I’m grateful every day for your presence in my life.<br>
+   I know sometimes I may not the best boyfriend, but I'm always learning new ways I can show my love and care to you.<br>
+    Thank you for always communicating with me and showing your love in so many ways too. I love you so much my dear, don't ever forget that.<br>
+	Thank you so much for being mine.
+<br><br>
+    Yours forever,<br>
+   Joel Tse 💕
+  </div>
+
+  <script>
+    const reasons = [
+     "I love your strength, even on your hardest days.",
+      "I love how you remember the little things that matter.",
+      "I love how you make me feel like the luckiest person alive.",
+      "I love your kindness and thoughtfulness, it's truly unmatched.",
+	"I love how you never fail to make me smile.",
+      "I love your voice, it's my favorite sound.",
+      "I love how you're my safe place and my biggest comfort.",
+      "I love how every moment with you feels like home, no matter where we are.",
+      "I love how you're so patient and supportive of me no matter what.",
+      "I love your beauty, inside and out.",
+	"I love how we always can't bear to say goodbye.",
+      "I love When you hold me close, all my worries just melt away.",
+      "I love your way with words, every letter by you just feels like a story I'm hooked on."
+    ];
+
+    let index = 0;
+    const box = document.getElementById('reason-box');
+    const button = document.getElementById('next-btn');
+    const endMessage = document.getElementById('end-message');
+    const envelopeContainer = document.getElementById('envelope-container');
+    const letterPopup = document.getElementById('final-letter');
+    let heartInterval;
+
+    function typeText(element, text, speed = 40, callback) {
+      element.innerText = "";
+      element.classList.add("typing");
+      button.disabled = true;
+      let i = 0;
+      const interval = setInterval(() => {
+        element.innerText += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          element.classList.remove("typing");
+          button.disabled = false;
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    function releaseFloatingHearts() {
+      heartInterval = setInterval(() => {
+        const heart = document.createElement('div');
+        const colors = ['💖', '💘', '💕', '❤️'];
+        heart.className = 'heart';
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.fontSize = `${20 + Math.random() * 15}px`;
+        heart.textContent = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
+
+    function toggleLetter() {
+      letterPopup.classList.toggle('show');
+    }
+
+    button.addEventListener('click', () => {
+      if (index < reasons.length) {
+        typeText(box, reasons[index]);
+        index++;
+        if (index === reasons.length) {
+          button.innerText = "Final Message 💌";
+        }
+      } else {
+        box.style.display = "none";
+        button.style.display = "none";
+        endMessage.classList.add('show');
+        envelopeContainer.style.display = 'flex';
+        releaseFloatingHearts();
+      }
+    });
+  </script>
+</body>
+</html>
